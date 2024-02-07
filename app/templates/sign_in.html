@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+{% block conteudo %}
+    <div class="main-login">
+        <div class="left-login">
+            <h1>Faça login <br> e entre para o nosso time</h1>
+            <img src="{{ url_for('static', filename='src/favicon.png') }}" class="left-login-image" alt="Pessoas">
+        </div>
+        <div class="right-login">
+            <div class="card-login">
+                <h1>Sign in</h1>
+                <div class="textfield">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" placeholder="email">
+                </div>
+                <div class="textfield">
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" placeholder="senha">
+                </div>
+                <button class="btn" id="btn-login">Sign in</button>
+                <p class="signin">Não tem conta? <a href="{{ url_for('signup') }}">Sign up</a> </p>
+            </div>
+        </div>
+    </div>
+
+    {% block scripts %}
+    <script type="module" src="../static/js/signIn.js"></script>
+    {% endblock %}
+{% endblock %}
