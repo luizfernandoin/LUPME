@@ -1,4 +1,4 @@
-import { alertSuccess, alertError } from "./alert.js";
+import { alertSuccess, alertError, ModalLogin } from "./modal.js";
 import { createRoom, getRooms, getMessages } from './firebase.js'
 
 const socket = io('http://127.0.0.1:5000');
@@ -7,6 +7,7 @@ let activeRoom;
 
 
 window.onload = function() {
+    ModalLogin();
     let roomContainer = document.querySelector(".main-rooms");
 
     async function tratarRooms() {

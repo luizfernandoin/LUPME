@@ -1,4 +1,4 @@
-import { alertSuccess, alertError } from "./alert.js";
+import { alertSuccess, alertError } from "./modal.js";
 
 import { 
   initializeApp

@@ -1,5 +1,5 @@
 import { validateEmail, validatePassword } from './firebase.js'
-import { alertSuccess, alertError } from "./alert.js";
+import { alertSuccess, alertError } from "./modal.js";
 
 function createUser() {
     const username = document.querySelector('[name="usuario"]').value;

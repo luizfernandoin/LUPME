@@ -1,5 +1,5 @@
 import { validateEmail, validatePassword } from './firebase.js'
-import { alertSuccess, alertError } from "./alert.js";
+import { alertSuccess, alertError, ModalLogin } from "./modal.js";
 
 
 function login() {
@@ -34,5 +34,3 @@ function login() {
 document.getElementById('btn-login').addEventListener('click', () => {
     login()
 });
-
-document.getElementById('').addEventListener('')
