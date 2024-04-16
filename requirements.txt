@@ -10,7 +10,7 @@ cryptography==41.0.5
 firebase-admin==6.2.0
 Flask==3.0.0
 Flask-SocketIO==5.3.6
-gcloud==0.18.3
+# gcloud==0.18.3  # Removendo a versão específica do gcloud
 google-api-core==2.14.0
 google-api-python-client==2.108.0
 google-auth==2.23.4
