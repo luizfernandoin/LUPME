@@ -17,45 +17,57 @@ function alertError(msg) {
 }
 
 function ModalCreateRoom() {
-    Swal.fire({
-        title: "<strong>ROOM</strong>",
-        icon: "info",
-        html: `
-          You can use <b>bold text</b>,
-          <a href="#">links</a>,
-          and other HTML tags
-        `,
-        showCloseButton: true,
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText: `
-          <i class="fa fa-thumbs-up"></i> Great!
-        `,
-        confirmButtonAriaLabel: "Thumbs up, great!",
-        cancelButtonText: `
-          <i class="fa fa-thumbs-down"></i>
-        `,
-        cancelButtonAriaLabel: "Thumbs down"
+    return new Promise((resolve, reject) => {
+        Swal.fire({
+            position: "top",
+            title: "Criar Sala",
+            text: "A sala que estás prestes a criar será visível para outras pessoas, para que possam acessá-la e interagir.",
+            icon: "question",
+            showCloseButton: true,
+            html: `
+                <div>
+                    <p>A sala que estás prestes a criar será visível para outras pessoas, para que possam acessá-la e interagir.</p>
+                    <input type="text" class="swal2-input" id="title-input" placeholder="Título da sala">
+                    <textarea class="swal2-textarea" placeholder="Descrição da sala" style="width: 100%; box-sizing: border-box;"></textarea>
+                </div>
+            `,
+            inputValidator: (value) => {
+                if (!value) {
+                    return "Você precisa fornecer uma descrição!";
+                }
+            },
+            preConfirm: () => {
+                const title = document.getElementById("title-input").value;
+                const description = document.querySelector(".swal2-textarea").value;
+                resolve({ title, description });
+            }
+        }).then(result => {
+            // Se o usuário clicou em "Cancelar", rejeite a promessa
+            if (result.dismiss === Swal.DismissReason.cancel) {
+                reject('Operação cancelada pelo usuário');
+            }
+        });
     });
 }
 
+
 function ModalDeleted() {
     Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        title: "Você tem certeza?",
+        text: "Você não poderá reverter isso!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: "Sim, exclua-o!"
     }).then((result) => {
-    if (result.isConfirmed) {
-        Swal.fire({
-        title: "Deleted!",
-        text: "Your file has been deleted.",
-        icon: "success"
-        });
-    }
+        if (result.isConfirmed) {
+            Swal.fire({
+            title: "Excluido!",
+            text: "Seu arquivo foi excluído.",
+            icon: "success"
+            });
+        }
     });
 }
 
@@ -64,7 +76,7 @@ function ModalLogin() {
         toast: true,
         position: "top-end",
         showConfirmButton: false,
-        timer: 3000,
+        timer: 2000,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.onmouseenter = Swal.stopTimer;
@@ -77,4 +89,4 @@ function ModalLogin() {
     });
 }
 
-export { alertSuccess, alertError, ModalLogin }
+export { alertSuccess, alertError, ModalLogin, ModalCreateRoom }

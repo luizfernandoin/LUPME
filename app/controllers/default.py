@@ -27,6 +27,7 @@ def autenticar():
     
     user = auth.sign_in_with_email_and_password(email, password)
     session['usuario_logado'] = email
+    
     return jsonify({'success': True, 'message': 'Login bem-sucedido'})
   except Exception as e:
     return jsonify({'success': False, 'message': 'Erro ao autenticar'})
@@ -56,7 +57,6 @@ def cadastrar_user():
   except Exception as e:
     return jsonify({'success': False, 'message': 'Erro ao cadastrar!'})
 
-
 #Função que recebe a mensagem enviada pelo usuario.
 @socketio.on('sendMessage')
 def send_message(data):
@@ -75,8 +75,6 @@ def send_message(data):
       
       bd.child(f'rooms/{room}/messages').push(messageData)
       emit('getMessage', messageData, room=room)
-
-
 
 # Função que lida com o evento de entrada na sala
 @socketio.on('join')

@@ -1,15 +1,10 @@
-import { validateEmail, validatePassword } from './firebase.js'
+import {  } from './firebase.js'
 import { alertSuccess, alertError, ModalLogin } from "./modal.js";
 
 
 function login() {
     const email = document.querySelector('[name="email"]').value;
     const password = document.querySelector('[name="senha"]').value;
-  
-    if (validateEmail(email) === false || validatePassword(password) === false) {
-        alert("Email ou Senha inválidos!");
-        return;
-    }
   
     fetch('/autenticar', {
         method: 'POST',
@@ -21,7 +16,10 @@ function login() {
     .then(response => response.json())
     .then(data => {
     if (data.success) {
-        window.location.href = '/';
+        ModalLogin();
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 2000);
     } else {
         alertError('E-mail ou senha inválidos!')
     }

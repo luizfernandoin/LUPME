@@ -1,5 +1,20 @@
-import { validateEmail, validatePassword } from './firebase.js'
+import {  } from './firebase.js'
 import { alertSuccess, alertError } from "./modal.js";
+
+function validatePassword(password) {
+    return (password < 6) ? false : true;
+}
+
+function validateEmail(email) {
+    let regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (regex.test(email)) {
+      return true;
+    } else {
+      alert("Endereço de e-mail inválido");
+      return false;
+    }
+}
 
 function createUser() {
     const username = document.querySelector('[name="usuario"]').value;
