@@ -24,6 +24,8 @@ function getMessages(id) {
     socket.emit('join', {
         room: activeRoom
     })
+
+    console.log("Mandou pegar as mensagens");
 }
     
 //Função que renderizará na tela a mensagem enviada pelo usuario.
@@ -81,6 +83,7 @@ function renderRoom(name, description, id) {
 
     roomDiv.setAttribute("data-room-id", id);
     roomDiv.addEventListener("click", () => {
+        console.log("Clicou!");
         const mainRooms = document.querySelectorAll('.room-rooms');
         mainRooms.forEach(room => room.classList.remove("active"));
         const clickedRoom = document.querySelector(`.room-rooms[data-room-id="${id}"]`);
@@ -137,6 +140,8 @@ socket.on('message', (msgs) => {
         addToChat(msg);
         // Adicione aqui a lógica necessária para processar cada mensagem
     });
+
+    console.log("Adicionou ao chat");
 })
 
 socket.on('newRoom', (data) => {

@@ -79,6 +79,7 @@ def send_message(data):
 # Função que lida com o evento de entrada na sala
 @socketio.on('join')
 def handle_join(data):
+  print("Chegou no join")
   if (auth.current_user):
     room = data['room']
     join_room(room)
