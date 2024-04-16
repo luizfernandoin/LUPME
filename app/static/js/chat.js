@@ -136,12 +136,11 @@ socket.on('getMessage', (data) => {
 
 //recebe do evento message todas as mensagens contidas no array ([{nome: , message: }])
 socket.on('message', (msgs) => {
+    console.log("Adicionou ao chat");
     msgs.forEach(msg => {
         addToChat(msg);
         // Adicione aqui a lógica necessária para processar cada mensagem
     });
-
-    console.log("Adicionou ao chat");
 })
 
 socket.on('newRoom', (data) => {

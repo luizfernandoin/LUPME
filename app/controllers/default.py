@@ -81,6 +81,7 @@ def send_message(data):
 def handle_join(data):
   print("Chegou no join")
   if (auth.current_user):
+    print(auth.current_user)
     room = data['room']
     join_room(room)
     messagesData = []
@@ -96,6 +97,7 @@ def handle_join(data):
         }
         messagesData.append(message)
       
+      print(messagesData)
       emit('message', messagesData, room=request.sid)
 
 @socketio.on('getRoom')
