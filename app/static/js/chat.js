@@ -1,5 +1,5 @@
 import { alertSuccess, alertError, ModalLogin, ModalCreateRoom } from "./modal.js";
-import { createRoom, getRooms, join } from './firebase.js'
+import { createRoom, getMessages, getRooms } from './firebase.js'
 
 const socket = io('https://lupme.onrender.com/');
 const authInfo = window.authInfo;
@@ -18,39 +18,19 @@ async function tratarRooms() {
     }
 }
 
-function processMessages(messages) {
-    const messagesData = [];
-    
-    // Iterar sobre as mensagens recebidas
-    for (const messageId in messages) {
-        if (Object.hasOwnProperty.call(messages, messageId)) {
-            const message = {
-                'message': messages[messageId]['message'],
-                'author': messages[messageId]['author'],
-            };
-            addToChat(message);
-        }
-    }
-}
-
-
-function getMessages(id) {
+function getMessagesRoom(id) {
     clearChatScreen();
-    join(activeRoom)
+    getMessages(activeRoom)
         .then((messages) => {
-            // Lidar com as mensagens recebidas
-            processMessages(messages);
+            socket.emit('join', {
+                room: activeRoom,
+                messages: messages  
+            });
+            console.log("Mandou pegar as mensagens");
         })
         .catch((error) => {
-            // Lidar com erros, se houver, ao recuperar as mensagens
             console.error("Erro ao recuperar as mensagens:", error);
         });
-
-    // socket.emit('join', {
-    //     room: activeRoom
-    // })
-
-    console.log("Mandou pegar as mensagens");
 }
     
 //Função que renderizará na tela a mensagem enviada pelo usuario.
@@ -117,7 +97,7 @@ function renderRoom(name, description, id) {
         }
 
         activeRoom = id;
-        getMessages()
+        getMessagesRoom()
     });
 
     var imagemRoom = document.createElement("div");
@@ -156,17 +136,13 @@ socket.on('connect', () => {
 
 //Cria um evento da instancia socket (getMessage), responsavel por receber a mensagem do backend. 
 socket.on('getMessage', (data) => {
-    console.log("getMessage");
     addToChat(data) //Aciona a função addToChat enviando a mensagem como parametro.
 })
 
 //recebe do evento message todas as mensagens contidas no array ([{nome: , message: }])
 socket.on('message', (msgs) => {
-    console.log("Adicionou ao chat");
-    console.log(msgs);
     msgs.forEach(msg => {
         addToChat(msg);
-        // Adicione aqui a lógica necessária para processar cada mensagem
     });
 })
 

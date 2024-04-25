@@ -79,7 +79,7 @@ function getRooms() {
   });
 }
 
-function join(roomId) {
+function getMessages(roomId) {
   return new Promise((resolve, reject) => {
     const messagesRef = ref(database, `rooms/${roomId}/messages`);
     
@@ -94,4 +94,4 @@ function join(roomId) {
 
 }
 
-export { database, createRoom, getRooms, join }
+export { database, createRoom, getRooms, getMessages }
