@@ -74,6 +74,7 @@ def send_message(data):
       
       
       bd.child(f'rooms/{room}/messages').push(messageData)
+      print(f"sendMessage: {messageData}")
       emit('getMessage', messageData, room=room)
 
 # Função que lida com o evento de entrada na sala

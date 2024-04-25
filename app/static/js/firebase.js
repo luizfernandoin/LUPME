@@ -79,4 +79,19 @@ function getRooms() {
   });
 }
 
-export { database, createRoom, getRooms }
+function join(roomId) {
+  return new Promise((resolve, reject) => {
+    const messagesRef = ref(database, `rooms/${roomId}/messages`);
+    
+    // Observador de mudança de valor para as mensagens da sala
+    onValue(messagesRef, (snapshot) => {
+      const messages = snapshot.val();
+      resolve(messages);
+    }, {
+      onlyOnce: true
+    });
+  });
+
+}
+
+export { database, createRoom, getRooms, join }
