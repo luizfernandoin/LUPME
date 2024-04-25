@@ -1,7 +1,7 @@
 import { alertSuccess, alertError, ModalLogin, ModalCreateRoom } from "./modal.js";
 import { createRoom, getRooms, join } from './firebase.js'
 
-const socket = io('127.0.0.1:5000');
+const socket = io('https://lupme.onrender.com/');
 const authInfo = window.authInfo;
 let activeRoom;
 let roomContainer = document.querySelector(".main-rooms");
