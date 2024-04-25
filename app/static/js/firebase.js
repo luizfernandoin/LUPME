@@ -79,19 +79,4 @@ function getRooms() {
   });
 }
 
-function getMessages(roomId) {
-  return new Promise((resolve, reject) => {
-    const messagesRef = ref(database, `rooms/${roomId}/messages`);
-    
-    // Observador de mudança de valor para as mensagens da sala
-    onValue(messagesRef, (snapshot) => {
-      const messages = snapshot.val();
-      resolve(messages);
-    }, {
-      onlyOnce: true
-    });
-  });
-
-}
-
-export { database, createRoom, getRooms, getMessages }
+export { database, createRoom, getRooms }

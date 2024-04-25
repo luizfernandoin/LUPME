@@ -60,7 +60,6 @@ def cadastrar_user():
 #Função que recebe a mensagem enviada pelo usuario.
 @socketio.on('sendMessage')
 def send_message(data):
-  print("sendMessage")
   if (auth.current_user):
     all_users = bd.child("users").get()
     if auth.current_user['localId'] in all_users.val():
@@ -73,22 +72,33 @@ def send_message(data):
         'author': username,
       }
       
+      
       bd.child(f'rooms/{room}/messages').push(messageData)
-      emit('getMessage', messageData)
+      emit('getMessage', messageData, room=room)
 
 # Função que lida com o evento de entrada na sala
 @socketio.on('join')
 def handle_join(data):
   print("Chegou no join")
   if (auth.current_user):
+    print(auth.current_user)
     room = data['room']
-    messages = data['messages']
-    messages_data = []
+    join_room(room)
+    messagesData = []
 
-    for message_id, message_content in messages.items():
-      messages_data.append(message_content)
-
-    emit('message', messages_data, room=request.sid)
+    rooms = bd.child('rooms').get()
+    # Enviar mensagens para o cliente recém-conectado
+    if room in rooms.val():
+      messages = rooms.val()[room]['messages']
+      for message in messages:
+        message = {
+          'message': messages[message]['message'],
+          'author': messages[message]['author'],
+        }
+        messagesData.append(message)
+      
+      print(messagesData)
+      emit('message', messagesData, room=request.sid)
 
 @socketio.on('getRoom')
 def create_room(id):

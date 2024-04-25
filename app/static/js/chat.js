@@ -1,7 +1,7 @@
 import { alertSuccess, alertError, ModalLogin, ModalCreateRoom } from "./modal.js";
-import { createRoom, getMessages, getRooms } from './firebase.js'
+import { createRoom, getRooms } from './firebase.js'
 
-const socket = io('https://lupme.onrender.com/');
+const socket = io('http://127.0.0.1:5000/');
 const authInfo = window.authInfo;
 let activeRoom;
 let roomContainer = document.querySelector(".main-rooms");
@@ -18,19 +18,14 @@ async function tratarRooms() {
     }
 }
 
-function getMessagesRoom(id) {
+function getMessages(id) {
     clearChatScreen();
-    getMessages(activeRoom)
-        .then((messages) => {
-            socket.emit('join', {
-                room: activeRoom,
-                messages: messages  
-            });
-            console.log("Mandou pegar as mensagens");
-        })
-        .catch((error) => {
-            console.error("Erro ao recuperar as mensagens:", error);
-        });
+
+    socket.emit('join', {
+        room: activeRoom
+    })
+
+    console.log("Mandou pegar as mensagens");
 }
     
 //Função que renderizará na tela a mensagem enviada pelo usuario.
@@ -97,7 +92,7 @@ function renderRoom(name, description, id) {
         }
 
         activeRoom = id;
-        getMessagesRoom()
+        getMessages()
     });
 
     var imagemRoom = document.createElement("div");
@@ -141,8 +136,10 @@ socket.on('getMessage', (data) => {
 
 //recebe do evento message todas as mensagens contidas no array ([{nome: , message: }])
 socket.on('message', (msgs) => {
+    console.log("Adicionou ao chat");
     msgs.forEach(msg => {
         addToChat(msg);
+        // Adicione aqui a lógica necessária para processar cada mensagem
     });
 })
 
