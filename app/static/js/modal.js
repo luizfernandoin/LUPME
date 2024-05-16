@@ -22,13 +22,12 @@ function ModalCreateRoom() {
             position: "top",
             title: "Criar Sala",
             text: "A sala que estás prestes a criar será visível para outras pessoas, para que possam acessá-la e interagir.",
-            icon: "question",
             showCloseButton: true,
             html: `
                 <div>
                     <p>A sala que estás prestes a criar será visível para outras pessoas, para que possam acessá-la e interagir.</p>
-                    <input type="text" class="swal2-input" id="title-input" placeholder="Título da sala">
-                    <textarea class="swal2-textarea" placeholder="Descrição da sala" style="width: 100%; box-sizing: border-box;"></textarea>
+                    <input type="text" class="swal2-input" id="title-input" placeholder="Título da sala" style="width: 80%; box-sizing: border-box;">
+                    <textarea class="swal2-textarea" placeholder="Descrição da sala" style="width: 80%; box-sizing: border-box;"></textarea>
                 </div>
             `,
             inputValidator: (value) => {

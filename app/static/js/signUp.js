@@ -1,6 +1,21 @@
 import {  } from './firebase.js'
 import { alertSuccess, alertError } from "./modal.js";
 
+const colors = [
+    'cadetblue',
+    'darkgoldenrod',
+    'cornflowerblue',
+    'darkkhaki',
+    'hotpink',
+    'gold'
+]
+
+const getRandomColor = () => {
+    const randomIndex = Math.floor(Math.random() * colors.length)
+    
+    return colors[randomIndex];
+}
+
 function validatePassword(password) {
     return (password < 6) ? false : true;
 }
@@ -20,6 +35,7 @@ function createUser() {
     const username = document.querySelector('[name="usuario"]').value;
     const email = document.querySelector('[name="email"]').value;
     const password = document.querySelector('[name="senha"]').value;
+    const color = getRandomColor();
 
     if (validateEmail(email) === false || validatePassword(password) === false) {
         alertError("Email ou Senha inválidos!")
@@ -30,7 +46,7 @@ function createUser() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, email, password }),
+            body: JSON.stringify({ username, email, password, color }),
         })
         .then(response => response.json())
         .then(data => {

@@ -8,7 +8,8 @@ import {
   getDatabase, 
   ref, 
   set, 
-  update, 
+  update,
+  remove,
   onValue, 
   child, 
   get, 
@@ -54,6 +55,7 @@ function createRoom(roomName, roomDescription, auth_info) {
     const roomData = {
       name: roomName,
       description: roomDescription,
+      adm: auth.currentUser.localId,
     };
     
     set(roomRef, roomData);
@@ -63,6 +65,18 @@ function createRoom(roomName, roomDescription, auth_info) {
   } else {
     alertError("Usuário não autenticado.");
   }
+}
+
+function removeRoom(roomId) {
+  const roomRef = ref(database, 'rooms/' + roomId);
+
+  remove(roomRef)
+    .then(() => {
+        console.log('Room removido com sucesso.');
+    })
+    .catch((error) => {
+        console.error('Erro ao remover room:', error);
+    });
 }
 
 function getRooms() {
@@ -79,4 +93,4 @@ function getRooms() {
   });
 }
 
-export { database, createRoom, getRooms }
+export { database, createRoom, getRooms, removeRoom }

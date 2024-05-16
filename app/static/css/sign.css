@@ -20,7 +20,7 @@ body * {
 }
 
 .main-login {
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     background: linear-gradient(#201b2c, #2b134b);
     display: flex;
@@ -31,8 +31,8 @@ body * {
 }
 
 .left-login {
-    width: 50vw;
-    height: 100vh;
+    width: 50%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,12 +47,12 @@ body * {
 }
 
 .left-login-image {
-    width: 35vw;
+    width: 30vw;
 }
 
 .right-login {
-    width: 50vw;
-    height: 100vh;
+    width: 50%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,43 +1,48 @@
 {% extends "index.html" %}
 {% block conteudo %}
-    <section class="container">
-        <div class="container-rooms">
-            <div class="header-rooms">
-
+    <main>
+        <section class="container">
+            <div class="menu-toggle">
+                <i class="bi bi-chevron-compact-right"></i>
             </div>
-            <div class="container-main-rooms">
-                <div class="main-rooms"></div>
-                
-                <button class="round-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                    </svg>
-                </button>
-            </div>
-
-        </div>
-
-        <div class="container-room">
-            <div class="header-room">
-            </div>
-            <div class="chat-room">
-                <div class="messages">
+            <section class="container-rooms">
+                <div class="header-rooms"></div>
+                <div class="main-rooms">
+                    <div class="rooms-room"></div>
+                    
+                    <button class="round-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                        </svg>
+                    </button>
                 </div>
+            </section>
     
-                <form class="message-form">
+            <section class="container-chat">
+                <div class="header-chat"></div>
+                <div class="chat-messages"></div>
+                <form class="message-form hidden">
                     <input type="text" class="message-input" placeholder="Digite sua mensagem">
-                    <button type="submit" class="send-button">Enviar</button>
+                    <button type="submit" class="send-button">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
                 </form>
-            </div>
-        </div>
-    </section>
 
-    {% block scripts %}
-        <script>
-            const authInfo = {{ auth_info|tojson|safe }};
-            window.authInfo = authInfo;
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
-        <script type="module" src="../static/js/chat.js"></script>
-    {% endblock %}
+                <div class="lupme-desc">
+                    <h1>LUPME <br> encontre foruns de seus interesses!</h1>
+                    <img src="{{ url_for('static', filename='src/favicon.png') }}" class="lupme-desc-image" alt="Pessoas">
+                </div>
+            </section>
+        </section>
+    
+        {% block scripts %}
+            <script>
+                const authInfo = {{ auth_info|tojson|safe }};
+                window.authInfo = authInfo;
+            </script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+            <script type="module" src="../static/js/chat.js"></script>
+            <script src="../static/js/header.js"></script>
+        {% endblock %}
+    </main>
 {% endblock %}
