@@ -210,3 +210,57 @@ document.querySelector('.round-button').addEventListener('click', async () => {
 });
 
 
+
+
+
+Hi, people - salve, salve, rede!👋
+
+
+
+🚀 LUPME - conexões entre usuários com interesses comuns 🚀
+
+Finalmente consegui concluir uma versão funcional de um projeto antigo denominado LUPME, onde basicamente os usuários podem criar salas de interação.
+
+
+
+✨ Funcionalidades:
+
+- Sign In & Sign Up
+
+- Criar e Excluir (adm's) Salas
+
+- Enviar mensagens
+
+
+
+💻 Tecnologias Utilizadas
+
+- Python
+
+- Flask
+
+- Socket IO
+
+- JavaScript
+
+- SweetAlert2
+
+- HTML
+
+- CSS
+
+
+
+🔗 Links
+
+GitHub: https://github.com/luizfernandoin/LUPME
+
+
+
+
+
+#python #forum #desenvolvimento #javascript #socketio #flask
+
+
+
+﻿
